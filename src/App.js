@@ -14,7 +14,11 @@ export default function App() {
         <View style={styles.numberContainer}>
           {
             [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => (
-              <CalcButton inputValue={value} onPress={() => setExpression(expression + value)} />
+              <CalcButton inputValue={value} onPress={() => setExpression(
+                expression === "0" ?
+                value :
+                expression + value
+              )} />
             ))
           }
 
