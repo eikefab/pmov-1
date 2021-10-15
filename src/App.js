@@ -23,7 +23,7 @@ export default function App() {
         </View>
         <View style={styles.expressionContainer}>
           {
-            ['/', '*', '+', '-'].map((value) => (
+            ['/', '*', '+', '-', '.'].map((value) => (
               <CalcButton inputValue={value} onPress={() => setExpression(expression + value)} />
             ))
           }
