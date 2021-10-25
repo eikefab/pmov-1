@@ -5,28 +5,28 @@ import Constants from 'expo-constants';
 
 export default function App() {
 
-  const [ expression, setExpression ] = useState("0");
-  const numberList = [
-    {number: '0'},
-    {number: '1'}, 
-    {number: '2'}, 
-    {number: '3'}, 
-    {number: '4'}, 
-    {number: '5'}, 
-    {number: '6'}, 
-    {number: '7'}, 
-    {number: '8'}, 
-    {number: '9'},
-    {number: 'C'},
-    {number: '='}
+  const [expression, setExpression] = useState("0");
+  const buttonsList = [
+    { buttons: '0' },
+    { buttons: '1' },
+    { buttons: '2' },
+    { buttons: '3' },
+    { buttons: '4' },
+    { buttons: '5' },
+    { buttons: '6' },
+    { buttons: '7' },
+    { buttons: '8' },
+    { buttons: '9' },
+    { buttons: 'C' },
+    { buttons: '=' }
   ]
 
   const expressionList = [
-    {expression: '/'}, 
-    {expression: '*'}, 
-    {expression: '+'}, 
-    {expression: '-'}, 
-    {expression: '.'}
+    { expression: '/' },
+    { expression: '*' },
+    { expression: '+' },
+    { expression: '-' },
+    { expression: '.' }
   ]
 
   return (
@@ -37,46 +37,46 @@ export default function App() {
       </View>
       <View style={styles.inputContainer}>
         <FlatList
-        contentContainerStyle={styles.flatlistNumbers}
-        data={numberList}
-        keyExtractor={value => value.number}
-        numColumns={4}
-        renderItem={({ item }) => {
-          if (item.number === 'C' || '=') {
-            if (item.number === 'C') {
-              return (
-                <CalcButton inputValue="C" onPress={() => setExpression("0")} />
-              )
-            }
+          contentContainerStyle={styles.flatlistButtons}
+          data={buttonsList}
+          keyExtractor={value => value.buttons}
+          numColumns={4}
+          renderItem={({ item }) => {
+            if (item.buttons === 'C' || '=') {
+              if (item.buttons === 'C') {
+                return (
+                  <CalcButton inputValue="C" onPress={() => setExpression("0")} />
+                )
+              }
 
-            if (item.number === '=') {
-              return (
-                <CalcButton inputValue="=" onPress={() => setExpression(eval(expression))} />
-              )
-            }
-          };
-          return (
-            <CalcButton inputValue={item.number} onPress={() => 
-              setExpression(expression === "0" 
-              ? (item.number) 
-              : expression + '' + (item.number))} />
-          );
-        }}
+              if (item.buttons === '=') {
+                return (
+                  <CalcButton inputValue="=" onPress={() => setExpression(eval(expression))} />
+                )
+              }
+            };
+            return (
+              <CalcButton inputValue={item.buttons} onPress={() =>
+                setExpression(expression === "0"
+                  ? (item.buttons)
+                  : expression + '' + (item.buttons))} />
+            );
+          }}
         >
-          
+
         </FlatList>
         <FlatList
-        contentContainerStyle={styles.flatlistExpressions}
-        data={expressionList}
-        keyExtractor={value => value.expression}
-        numColumns={4}
-        renderItem={({ item }) => {
-          return (
-            <CalcButton 
-            inputValue={item.expression} onPress={() => 
-              setExpression(expression + item.expression)} />
-          );
-        }}
+          contentContainerStyle={styles.flatlistExpressions}
+          data={expressionList}
+          keyExtractor={value => value.expression}
+          numColumns={4}
+          renderItem={({ item }) => {
+            return (
+              <CalcButton
+                inputValue={item.expression} onPress={() =>
+                  setExpression(expression + item.expression)} />
+            );
+          }}
         >
         </FlatList>
       </View>
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     paddingTop: Constants.statusBarHeight,
+    justifyContent: 'center',
   },
 
   resultContainer: {
@@ -99,9 +100,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10
   },
-  
+
   result: {
-    fontSize: 50
+    fontSize: 50,
+    marginVertical: 15,
+    width: '90%',
+    backgroundColor: '#c7c7c7',
+    textAlign: 'center'
   },
 
   inputContainer: {
@@ -111,18 +116,20 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   },
 
-  flatlistNumbers: {
+  flatlistButtons: {
     height: 1,
     flexGrow: 0,
     minHeight: 195,
     backgroundColor: '#d9d9d9',
+    alignItems: 'center',
   },
 
   flatlistExpressions: {
     height: 1,
     flexGrow: 0,
     minHeight: 70,
-    backgroundColor: '#d9d9d9'
+    backgroundColor: '#d9d9d9',
+    alignItems: 'center',
   },
 
   inputButton: {
@@ -131,7 +138,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 50,
-    width: 50,
+    width: '17%',
     backgroundColor: 'black',
     borderRadius: 5,
   },
